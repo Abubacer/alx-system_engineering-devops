@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
-# This a Bash script that displays The content of the current directory.
-for f in *; do
-	if [ ! -d "$f" ] && [[ ! "$f" =~ ^\. ]]; then
-		newname="${f#*-}"
-		echo "$newname"
+# This a Bash script that gives you information about the school file.
+filename="school"
+if [ -e "$filename" ]; then
+	echo "$filename file exist"
+	if [ -s "$filename" ]; then
+		echo "$filename file is not empty"
+	else
+		echo "$filename file is empty"
 	fi
-done
+
+	if [ -f "$filename" ]; then
+		echo "$filename is a regular file"
+	fi
+else
+	echo "$filename file does not exist"
+fi
