@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This a Bash script that displays the content of the file using cut.
+f="/etc/passwd"
+while IFS= read -r line; do
+	username=$(echo "$line" | cut -d ':' -f 1)
+	userid=$(echo "$line" | cut -d ':' -f 3)
+	dirpathuser=$(echo "$line" | cut -d ':' -f 6)
+
+	echo "$username:$userid:$dirpathuser"
+done < "$f"
