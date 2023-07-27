@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This a Bash script that displays and tell the story of passwd.
+f="/etc/passwd"
+while IFS= read -r line; do
+	username=$(echo "$line" | cut -d ':' -f 1)
+	userid=$(echo "$line" | cut -d ':' -f 3)
+	homedir=$(echo "$line" | cut -d ':' -f 6)
+	cmdshell=$(echo "$line" | cut -d ':' -f 7)
+	groupid=$(echo "$line" | cut -d ':' -f 4)
+	password=$(echo "$line" | cut -d ":" -f 2)
+	useridinfo=$(echo "$line" | cut -d ":" -f 5)
+
+	echo "The user $username is part of the $groupid gang, lives in $homedir and rides $cmdshell. $userid's place is protected by the passcode $password, more info about the user here: $useridinfo"
+done < "$f"
