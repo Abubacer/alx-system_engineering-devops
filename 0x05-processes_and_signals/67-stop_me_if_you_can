@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# This is a Bash script that stops highlander process without using kill or killall.
+pkill -f highlander
