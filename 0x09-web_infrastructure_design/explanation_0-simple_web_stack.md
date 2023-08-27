@@ -6,14 +6,17 @@ A one server web infrastructure that hosts the website that is reachable via www
 
 ## Specifics about this infrastructure:
 ### What is a server
-- The server is a physical or virtual machine that hosts the entire web infrastructure. It takes care of handling requests from visitors, running different parts of the website, and talking to the database.
+- The server is a physical or virtual machine that hosts the entire web infrastructure. and runs an OS (operating system), accessible only by a network. 
+- The servers are often housed in dedicated data centers.
+- It takes care of handling requests from visitors, running different parts of the website, and talking to the database.
 
 ### What is the role of the domain name
 - The domain name "foobar.com" is a human-readable address that represents the server's IP address (8.8.8.8 in this case).
 - A DNS (Domain Name System) server translates the domain name into the corresponding IP address, allowing users to access the server by its name.
 
 ### What type of DNS record www is in www.foobar.com
-- Is a subdomain, and the DNS record for "www" is a CNAME (Canonical Name) record that points to the main domain record 
+- Is a subdomain, and the DNS record for "www" is a CNAME (Canonical Name) record that points to the main domain record.
+- if the IP address changes we can only record changes in the DNS A record of foobar.com.
 - The ("foobar.com") associates "www.foobar.com" with the same IP address (8.8.8.8).
 
 ### What is the role of the web server

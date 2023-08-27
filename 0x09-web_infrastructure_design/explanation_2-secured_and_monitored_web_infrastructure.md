@@ -39,8 +39,13 @@ A three server secured, serve encrypted traffic, and monitored web infrastructur
 
 ### Having only one MySQL server capable of accepting writes:
 - This issue creates a single point of failure and limits write scalability.
-- it is not scalable.
+- if the master node fails, the Application cannot write to the database anymore
 
 ### Having servers with all the same components:
 - Identical components might not optimize resource utilization, especially if some servers are more powerful or specialized.
+- Their consumption will not grow the same way between each of component.
 - It can lead to poor performance and also make it difficult to troubleshoot the source of the problem.
+- The maintenance performed on a server for a specific component, will affect other components there on it.
+
+### SPOF:
+- if the load balancer fails, visitors can't access the website.
