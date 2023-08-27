@@ -2,7 +2,7 @@
 
 A three server web infrastructure that hosts the website www.foobar.com.
 
-[Whiteboard Screenshot Link](https://photos.app.goo.gl/4UvCNSx3TANGSs9E6)
+[Whiteboard Screenshot Link](https://photos.app.goo.gl/LTVLQYEWhbqiHUqZ9)
 
 ## Specifics about this infrastructure:
 ### Additional element:
