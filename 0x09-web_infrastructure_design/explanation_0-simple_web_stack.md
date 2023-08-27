@@ -1,6 +1,8 @@
 # Simple web stack
 
-[Whiteboard Screenshot Link](https://photos.app.goo.gl/4UvCNSx3TANGSs9E6)
+A one server web infrastructure that hosts the website that is reachable via www.foobar.com
+
+[Whiteboard Screenshot Link](https://photos.app.goo.gl/Xu2TDkUPC8VLShSK8)
 
 ## Specifics about this infrastructure:
 ### What is a server
