@@ -24,7 +24,7 @@ A three server web infrastructure that hosts the website www.foobar.com.
 
 ### How a database Primary-Replica (Master-Slave) cluster works:
 - The master-slave is a database architecture divided into a master database and slave databases.
-- The slave database serves as the backup and as a replica for the master database. The master database is used for the write operations, while read operations may be spread on multiple slave databases.
+- The slave database serves as the backup and as a replica for the master database. The master database is used for the reads/writes operations, while read operations may be spread on multiple slave databases.
 - Data is synchronized between the two servers whenever the Primary server executes a write requests.
 
 ### What is the difference between the Primary node and the Replica node in regard to the application
