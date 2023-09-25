@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Installs and set ups an nginx web server on my server.
+# Returns a page that contains the string 'Hello World!'.
+
+sudo apt update
+sudo apt install nginx -y
+
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw --force enable
+sudo ufw status
+
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+sudo service nginx restart
