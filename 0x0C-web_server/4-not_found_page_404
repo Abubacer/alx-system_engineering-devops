@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Installs and set ups an nginx web server on my server.
+# Configures an Nginx server so that /redirect_me is redirecting to another page using “301 Moved Permanently”.
+# Configures an Nginx server with a custom 404 page that contains "Ceci n'est pas une page".
+
+sudo apt update
+sudo apt install nginx -y
+
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw --force enable
+sudo ufw status
+
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+
+sudo sed -i "/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+sudo sed -i "/listen 80 default_server/a error_page 404 /custom_404.html;\n location = /custom_404.html {\n     root /usr/share/nginx/html;\n     internal;\n }" /etc/nginx/sites-available/default
+
+sudo service nginx restart
