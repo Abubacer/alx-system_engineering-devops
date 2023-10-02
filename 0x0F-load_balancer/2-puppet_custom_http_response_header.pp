@@ -29,13 +29,13 @@ file { '/var/www/html/404.html':
 
 file { 'Nginx default config file':
   ensure  => present,
-  path    => '/etc/nginx/sites-enabled/default',
+  path    => '/etc/nginx/sites-available/default',
   content =>
 "server {
         listen 80 default_server;
         listen [::]:80 default_server;
-        add_header X-Served-By \$hostname;
-               root /var/www/html;
+        add_header X-Served-By $hostname;
+        root /var/www/html;
 
         index index.html index.htm index.nginx-debian.html;
 
