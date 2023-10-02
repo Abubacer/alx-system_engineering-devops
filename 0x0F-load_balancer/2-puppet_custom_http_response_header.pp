@@ -27,7 +27,7 @@ file { '/var/www/html/404.html':
 }
 
 file { 'Nginx default config file':
-  ensure  => file,
+  ensure  => present,
   path    => '/etc/nginx/sites-enabled/default',
   content =>
 "server {
