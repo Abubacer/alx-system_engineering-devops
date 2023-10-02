@@ -4,26 +4,27 @@
 # The value of the HTTP header: the hostname of the server is running on.
 
 package { 'nginx':
-  ensure     => 'installed',
+  ensure  => 'installed',
 }
 
-exec { 'allow HTTP':
-  command => "ufw allow 'Nginx HTTP'",
-  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  onlyif  => '! dpkg -l nginx | egrep \'îi.*nginx\' > /dev/null 2>&1',
+exec { 'ufw-allow-ports':
+    command => 'ufw allow 22,80',
+    path    => '/usr/sbin',
+    require => Package['nginx'],
 }
 
-exec { 'chmod www folder':
-  command => 'chmod -R 755 /var/www',
-  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+file { '/var/www/html':
+  ensure  => directory,
 }
 
 file { '/var/www/html/index.html':
-  content => "Hello World!\n",
+  ensure  => present,
+  content => 'Hello World!',
 }
 
 file { '/var/www/html/404.html':
-  content => "Ceci n'est pas une page\n",
+  ensure  => present,
+  content => "Ceci n'est pas une page",
 }
 
 file { 'Nginx default config file':
@@ -33,7 +34,7 @@ file { 'Nginx default config file':
 "server {
         listen 80 default_server;
         listen [::]:80 default_server;
-        add_header X-Served-By $hostname;
+        add_header X-Served-By \$hostname;
                root /var/www/html;
 
         index index.html index.htm index.nginx-debian.html;
@@ -55,12 +56,8 @@ file { 'Nginx default config file':
 ",
 }
 
-exec { 'restart service':
-  command => 'service nginx restart',
-  path    => '/usr/bin:/usr/sbin:/bin',
-}
-
 service { 'nginx':
   ensure  => running,
-  require => Package['nginx'],
+  enable  => true,
+  require => File['/etc/nginx/sites-available/default'],
 }
