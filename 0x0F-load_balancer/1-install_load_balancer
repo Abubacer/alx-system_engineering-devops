@@ -24,11 +24,10 @@ backend $DOMAIN_NAME-backend
 frontend $DOMAIN_NAME-frontend
 	bind *:80
 	mode http
-    
-	default_backend $DOMAIN_NAME-backend
+        default_backend $DOMAIN_NAME-backend
 "
 
-echo -e "ENABLED=1\n" | sudo tee -a "$HAPROXY_INIT_FILE"
-echo -e "$LOAD_BALANCER_SETUP" | sudo tee -a "$HAPROXY_CONFIG_FILE"
+echo -e "ENABLED=1\n" >> "$HAPROXY_INIT_FILE"
+echo "$LOAD_BALANCER_SETUP" >> "$HAPROXY_CONFIG_FILE"
 
 sudo service haproxy restart
