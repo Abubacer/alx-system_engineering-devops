@@ -9,21 +9,21 @@ sudo apt-get -y install --no-install-recommends software-properties-common
 # Adds the dedicated PPA repository
 sudo add-apt-repository -y ppa:vbernat/haproxy-2.0
 # Get the latest release of HAProxy 2.0 from the above PPA repository:
-sudo apt-get install haproxy=2.0.\* -y
+sudo apt-get install -y haproxy
 
 LOAD_BALANCER_SETUP="
 backend binarydesign.tech-backend
-	balance roundrobin
-	server 377432-web-01 3.84.161.155:80 check
-	server 377432-web-02 100.25.23.133:80 check
+        balance roundrobin
+        server 377432-web-01 3.84.161.155:80 check
+        server 377432-web-02 100.25.23.133:80 check
 
 frontend binarydesign.tech-frontend
-	bind *:80
-	mode http
+        bind *:80
+        mode http
         default_backend binarydesign.tech-backend
 "
 
-echo -e "ENABLED=1\n" >> /etc/default/haproxy
+echo "ENABLED=1" >> /etc/default/haproxy
 echo "$LOAD_BALANCER_SETUP" >> /etc/haproxy/haproxy.cfg
 
 sudo service haproxy restart
