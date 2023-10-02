@@ -7,7 +7,7 @@ sudo apt update
 # Enable a dedicated PPA package for HAProxy:
 sudo apt-get -y install --no-install-recommends software-properties-common
 # Adds the dedicated PPA repository
-sudo add-apt-repository ppa:vbernat/haproxy-2.0
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.0
 # Get the latest release of HAProxy 2.0 from the above PPA repository:
 sudo apt-get install haproxy=2.0.\* -y
 
