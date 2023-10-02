@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Set ups web-02 server to be identical to web-01 server.
+# Adds a custom Nginx response header on web-02 and web-01 servers, to be
+# able to track which web server is answering our HTTP requests:
+# - The name of the custom HTTP header: X-Served-By.
+# - The value of the HTTP header: hostname of the server Nginx is running on.
+
+sudo apt update
+sudo apt install nginx -y
+
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw --force enable
+sudo ufw status
+
+sudo mkdir -p /var/www/html /var/www/error
+sudo chmod -R 755 /var/www
+
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+SERVER_SETUP="server {
+	listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+        add_header X-Served-By \$hostname;
+        location / {
+               try_files \$uri \$uri/ =404;
+        }
+        error_page 404 /404.html;
+        location = /404.html {
+               internal;
+        }
+
+        if (\$request_filename ~ redirect_me){
+               rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        }
+
+}"
+echo "$SERVER_SETUP" > /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
