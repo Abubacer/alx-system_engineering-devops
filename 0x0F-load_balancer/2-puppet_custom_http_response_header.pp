@@ -7,12 +7,6 @@ package { 'nginx':
   ensure  => 'installed',
 }
 
-exec { 'ufw-allow-ports':
-    command => 'ufw allow 22,80',
-    path    => '/usr/sbin',
-    require => Package['nginx'],
-}
-
 file { '/var/www/html':
   ensure  => directory,
 }
