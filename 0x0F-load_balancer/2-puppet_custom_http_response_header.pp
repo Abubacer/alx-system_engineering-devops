@@ -38,7 +38,7 @@ file { 'Nginx default config file':
         index index.html index.htm index.nginx-debian.html;
 
         server_name _;
-        add_header X-Served-By \$hostname;
+        add_header X-Served-By $hostname;
         location / {
 
                 try_files \$uri \$uri/ =404;
