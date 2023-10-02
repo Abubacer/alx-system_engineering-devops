@@ -3,8 +3,27 @@
 # The name of the custom HTTP header: X-Served-By.
 # The value of the HTTP header: the hostname of the server is running on.
 
+exec { 'apt-update':
+  command     => 'apt update',
+  path        => '/usr/bin',
+  refreshonly => true,
+}
+
 package { 'nginx':
   ensure  => 'installed',
+  require => Exec['apt-update'],
+}
+
+exec { 'ufw-allow-ports':
+  command => 'ufw allow 22,80',
+  path    => '/usr/sbin',
+  require => Package['nginx'],
+}
+
+exec { 'ufw-enable':
+  command => 'ufw --force enable && ufw status',
+  path    => '/usr/sbin',
+  require => Exec['ufw-allow-ports'],
 }
 
 file { '/var/www/html':
