@@ -29,11 +29,11 @@ file { '/var/www/html/404.html':
 
 file { '/etc/nginx/sites-available/default':
   ensure  => present,
-  content => "
+  content => '
     server {
       listen 80 default_server;
       listen [::]:80 default_server;
-      add_header X-Served-By $hostname;
+      add_header X-Served-By \$hostname;
       root /var/www/html;
       index index.html index.htm;
 
@@ -47,7 +47,7 @@ file { '/etc/nginx/sites-available/default':
         internal;
       }
     }
-  ",
+  ',
 }
 
 service { 'nginx':
