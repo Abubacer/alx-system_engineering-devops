@@ -38,5 +38,5 @@ file_line { 'add custom HTTP header':
 service { 'nginx':
   ensure  => running,
   enable  => true,
-  require => File['/etc/nginx/sites-available/default'],
+  require => Package['nginx'],
 }
