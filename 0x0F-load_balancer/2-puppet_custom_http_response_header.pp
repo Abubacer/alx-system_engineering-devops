@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # A Puppet manifest that installs and setups an nginx web server.
 # Creates a custom HTTP header response.
 # The name of the custom HTTP header: X-Served-By.
