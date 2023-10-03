@@ -14,24 +14,9 @@ package { 'nginx':
   require => Exec['apt-update'],
 }
 
-file { '/var/www/html':
-  ensure  => directory,
-}
-
-file { '/var/www/html/index.html':
-  ensure  => present,
-  content => 'Hello World!',
-}
-
-file { '/var/www/html/404.html':
-  ensure  => present,
-  content => "Ceci n'est pas une page",
-}
-
 file_line { 'add custom HTTP header':
   ensure => present,
   path   => '/etc/nginx/sites-available/default',
-  after  => 'listen 80 default_server;',
   line   => 'add_header X-Served-By $hostname;',
 }
 
