@@ -14,18 +14,6 @@ package { 'nginx':
   require => Exec['apt-update'],
 }
 
-exec { 'ufw-allow-ports':
-  command => 'ufw allow 22,80',
-  path    => '/usr/sbin',
-  require => Package['nginx'],
-}
-
-exec { 'ufw-enable':
-  command => 'ufw --force enable && ufw status',
-  path    => '/usr/sbin',
-  require => Exec['ufw-allow-ports'],
-}
-
 file { '/var/www/html':
   ensure  => directory,
 }
