@@ -10,8 +10,8 @@ exec { 'apt-update':
 }
 
 package { 'nginx':
-  ensure  => 'installed',
-  require => Exec['apt-update'],
+  ensure   => present,
+  provider => 'apt',
 }
 
 file_line { 'add custom HTTP header':
