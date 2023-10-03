@@ -10,19 +10,53 @@ exec { 'apt-update':
 }
 
 package { 'nginx':
-  ensure   => present,
-  provider => 'apt',
+  ensure => installed,
 }
 
-file_line { 'add custom HTTP header':
-  ensure => present,
-  path   => '/etc/nginx/sites-available/default',
-  after  => 'listen 80 default_server;',
-  line   => 'add_header X-Served-By $hostname;',
+file { '/var/www/html':
+  ensure => directory,
+}
+
+file { '/var/www/html/index.html':
+  ensure  => present,
+  content => 'Hello World!',
+}
+
+file { '/var/www/html/404.html':
+  ensure  => present,
+  content => "Ceci n'est pas une page",
+}
+
+file { '/etc/nginx/sites-available/default':
+  ensure  => present,
+  content => '
+    server {
+	listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+        add_header X-Served-By \$hostname;
+        location / {
+               try_files \$uri \$uri/ =404;
+        }
+        error_page 404 /404.html;
+        location = /404.html {
+               internal;
+        }
+
+        if (\$request_filename ~ redirect_me){
+               rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        }
+
+    }
+  ',
 }
 
 service { 'nginx':
   ensure  => running,
   enable  => true,
-  require => Package['nginx'],
+  require => File['/etc/nginx/sites-available/default'],
 }
