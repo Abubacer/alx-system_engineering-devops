@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # A Puppet manifest that installs and setups an nginx web server.
 # Creates a custom HTTP header response.
 # The name of the custom HTTP header: X-Served-By.
@@ -29,27 +28,11 @@ file { '/var/www/html/404.html':
   content => "Ceci n'est pas une page",
 }
 
-file { '/etc/nginx/sites-available/default':
-  ensure  => present,
-  content => '
-    server {
-      listen 80 default_server;
-      listen [::]:80 default_server;
-      add_header X-Served-By $hostname;
-      root /var/www/html;
-      index index.html index.htm;
-
-      location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-      }
-
-      error_page 404 /404.html;
-      location /404 {
-        root /var/www/html;
-        internal;
-      }
-    }
-  ',
+file_line { 'add custom HTTP header':
+  ensure => present,
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'add_header X-Served-By $hostname;',
 }
 
 service { 'nginx':
