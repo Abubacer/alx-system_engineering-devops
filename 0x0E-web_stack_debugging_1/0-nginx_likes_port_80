@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # Fix what’s keeping my Ubuntu container’s Nginx installation from listening on port 80.
+# Disable the default Nginx server block configuration enable it again, and then restart Nginx
 
-# Checks nginx installation.
-sudo apt update
-sudo apt install nginx -y
-
-# Checks if nginx is already configured to listen on port 80. If not, modifie the nginx configuration to listen on port 80.
-sudo ufw allow 'Nginx HTTP'
-
+# Delete the symbolic link located at Nginx server block configuration
+rm /etc/nginx/sites-enabled/default
+# Create a new ymbolic link
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 # Restart nginx to apply the change
 sudo service nginx restart
