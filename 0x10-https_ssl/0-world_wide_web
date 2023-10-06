@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Gets DNS informations for subdomain.
+# When only the parameter domain is provided, display information for its subdomains.
+# When passing domain and subdomain parameters, display information for the specified subdomain.
+
+get_dns() {
+    DOMAIN="$1"
+    SUB_DOMAIN="$2"
+
+    if [ -z "$SUB_DOMAIN" ]; then
+        SUBDOMAINS=("www" "lb-01" "web-01" "web-02")
+    else
+        SUBDOMAINS=("$SUB_DOMAIN")
+    fi
+
+    for SUB in "${SUBDOMAINS[@]}"; do
+        RECORD_TYPE=$(dig "$SUB.$DOMAIN" | awk '/ANSWER SECTION/ { getline; print $4 }')
+        DESTINATION=$(dig "$SUB.$DOMAIN" | awk '/ANSWER SECTION/ { getline; print $5 }')
+
+        echo "The subdomain $SUB is a $RECORD_TYPE record and points to $DESTINATION"
+    done
+}
+
+get_dns "$1" "$2"
