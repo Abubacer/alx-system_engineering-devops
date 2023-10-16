@@ -9,13 +9,12 @@
 <div align="left">
 <br />
 
-# 0x10. HTTPS SSL
+# 0x13. Firewall
 
 ## Background Context
 
 For this project, we are expected to look at these concepts:
 
-- [DNS](https://intranet.alxswe.com/concepts/12)
 - [Web stack debugging](https://intranet.alxswe.com/concepts/68)
 
 ### servers without a firewall…
