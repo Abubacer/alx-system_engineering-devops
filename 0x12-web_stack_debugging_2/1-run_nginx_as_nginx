@@ -9,5 +9,5 @@ chmod 644 /etc/nginx/nginx.conf
 sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
 # Make nginx listening on all active IPs on port 8080
 sed -i 's/80/8080/g' /etc/nginx/sites-available/default
-# Run nginx with ne config
+# Run nginx with new config
 sudo -u nginx service nginx start
