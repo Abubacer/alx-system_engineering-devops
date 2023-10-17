@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Fix container so that Nginx is running Nginx as Nginx user.
+
+# Stop nginx service
+sudo -u nginx service nginx stop
+# change nginx.conf permissions
+chmod 644 /etc/nginx/nginx.conf
+# Change nginx to be running as nginx user
+sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
+# Make nginx listening on all active IPs on port 8080
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+# Run nginx with ne config
+sudo -u nginx service nginx start
