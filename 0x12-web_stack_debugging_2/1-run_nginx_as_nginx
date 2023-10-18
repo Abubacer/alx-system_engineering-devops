@@ -3,6 +3,8 @@
 
 # Stop nginx service
 sudo -u nginx service nginx stop
+# Kill apache pid
+sudo pkill apache2
 # change nginx.conf permissions
 chmod 644 /etc/nginx/nginx.conf
 # Change nginx to be running as nginx user
