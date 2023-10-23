@@ -22,11 +22,11 @@ def fetch_employee_todo_data(employee_id):
     user_data = user_response.json()
     todos_data = todos_response.json()
 
-    employee_name = user_data["name"]
+    employee_name = user_data.get("name")
 
     completed_tasks = []
     for task in todos_data:
-        if task["completed"]:
+        if task.get("completed") is True:
             completed_tasks.append(task)
 
     total_number_tasks = len(todos_data)
@@ -36,7 +36,8 @@ def fetch_employee_todo_data(employee_id):
           .format(employee_name, number_completed_tasks, total_number_tasks))
 
     for task in completed_tasks:
-        print("\t{}".format(task["title"]))
+        title = task.get("title")
+        print("\t {}".format(title))
 
 
 if __name__ == "__main__":
