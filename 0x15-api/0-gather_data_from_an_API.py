@@ -14,30 +14,34 @@ def fetch_employee_todo_data(employee_id):
     Args:
         employee_id (int): The employee ID to get his/her TODO list progress.
     """
-    api_url = "https://jsonplaceholder.typicode.com"
+    api_url = "https://jsonplaceholder.typicode.com/users/"
 
-    user_response = get("{}/users/{}".format(api_url, employee_id))
-    todos_response = get("{}/todos?userId={}".format(api_url, employee_id))
+    response = get("{}/{}".format(api_url, employee_id))
 
-    user_data = user_response.json()
-    todos_data = todos_response.json()
+    data = response.json()
+    employee_name = response.json().get("name")
 
-    employee_name = user_data.get("name")
+    if employee_name is not None:
+        todos_response = get("{}{}/todos".format(api_url, employee_id))
+        todos_data = todos_response.json()
 
-    completed_tasks = []
-    for task in todos_data:
-        if task.get("completed") is True:
-            completed_tasks.append(task)
+        total_number_tasks = len(todos_data)
 
-    total_number_tasks = len(todos_data)
-    number_completed_tasks = len(completed_tasks)
+        completed_tasks = []
+        for task in todos_data:
+            if task.get("completed") is True:
+                completed_tasks.append(task)
 
-    print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, number_completed_tasks, total_number_tasks))
+        number_completed_tasks = len(completed_tasks)
 
-    for task in completed_tasks:
-        title = task.get("title")
-        print("\t {}".format(title))
+        print("Employee {} is done with tasks({}/{}):".format(
+            employee_name, number_completed_tasks, total_number_tasks
+            )
+        )
+
+        for task in completed_tasks:
+            title = task.get("title")
+            print("\t {}".format(title))
 
 
 if __name__ == "__main__":
