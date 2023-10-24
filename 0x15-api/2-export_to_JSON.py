@@ -3,6 +3,8 @@
 Gathers data from 'jsonplaceholder' API. Returns for a given employee ID
 information about his/her TODO list progress.
 
+Records all tasks that are owned by this employee.
+
 Export the gathed data in the JSON format. Format:
 { "USER_ID": [{"task": "TASK_TITLE", "completed": TASK_COMPLETED_STATUS,
 "username": "USERNAME"}, {"task": "TASK_TITLE",
