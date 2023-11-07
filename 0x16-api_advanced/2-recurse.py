@@ -18,15 +18,19 @@ def recurse(subreddit, hot_list=[], count=0, after=None):
     response = requests.get(api_url, headers={"User-Agent": "My-User-Agent"},
                             params={"count": count, "after": after},
                             allow_redirects=False)
-    data = response.json()
-    posts = data.get('data', {}).get('children', [])
-    if posts:
-        for post in posts:
-            hot_list.append(post['data']['title'])
-        after = data['data']['after']
-        if not after:
-            return hot_list
 
-        return recurse(subreddit, hot_list, count, after)
+    if response.status_code >= 400:
+        return None
+
+    data = response.json()
+    children = data["data"]["children"]
+    hot_list += [child["data"]["title"] for child in children]
+    if "count" in data["data"]:
+        count = data["data"]["count"]
     else:
+        count = None
+
+    if not data["data"]["after"]:
         return hot_list
+
+    return recurse(subreddit, hot_list, count, data["data"]["after"])
