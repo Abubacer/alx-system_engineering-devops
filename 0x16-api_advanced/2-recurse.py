@@ -7,7 +7,7 @@ articles for a given subreddit.
 import requests
 
 
-def recurse(subreddit, hot_list=[], count=None, after=None):
+def recurse(subreddit, hot_list=[], count=0, after=None):
     """
     Returns a list of the titles of all hot articles for a given subreddit.
     If no results are found for the given subreddit, return None.
@@ -27,6 +27,6 @@ def recurse(subreddit, hot_list=[], count=None, after=None):
         if not after:
             return hot_list
 
-        return recurse(subreddit, hot_list, after)
+        return recurse(subreddit, hot_list, count, after)
     else:
         return hot_list
