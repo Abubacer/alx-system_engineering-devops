@@ -15,11 +15,11 @@
 
 For this project, we are expected to look at these concepts:
 
-[Web server](https://www.youtube.com/watch?v=AZg4uJkEa-4)
-[Server](https://intranet.alxswe.com/concepts/67)
-[Web stack debugging](https://intranet.alxswe.com/concepts/68)
+- [Web server](https://www.youtube.com/watch?v=AZg4uJkEa-4)
+- [Server](https://intranet.alxswe.com/concepts/67)
+- [Web stack debugging](https://intranet.alxswe.com/concepts/68)
 
-[alt-img](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/9/c7d1ed0a2e10d1b4e9b3.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20231113%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231113T142747Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=3df83534a4a2d3d1966c7799ee68f13d696bcf851e7ada69a8201f2f03d2f138)
+![alt text](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/9/c7d1ed0a2e10d1b4e9b3.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20231113%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231113T142747Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=3df83534a4a2d3d1966c7799ee68f13d696bcf851e7ada69a8201f2f03d2f138)
 
 Our web infrastructure is already serving web pages via Nginx that we installed in our first web stack project. While a web server can also serve dynamic content, this task is usually given to an application server.
 
