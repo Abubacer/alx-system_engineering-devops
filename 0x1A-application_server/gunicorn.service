@@ -1,0 +1,19 @@
+# systemd script starts a Gunicorn process to serve my application for me
+# The Gunicorn process spawn 3 worker processes and bind to port 5003
+# Log errors in /tmp/airbnb-error.log
+# Log access in /tmp/airbnb-access.log
+
+[Unit]
+Description=Gunicorn instance to serve AirBnB web application
+After=network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+ExecStart=/usr/bin/gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app
+StandardOutput=file:/tmp/airbnb-access.log
+StandardError=file:/tmp/airbnb-error.log
+
+[Install]
+WantedBy=multi-user.target
