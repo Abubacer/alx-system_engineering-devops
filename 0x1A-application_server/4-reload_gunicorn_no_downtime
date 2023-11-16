@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Reloads Gunicorn in a graceful way
+# By sending the HUP (Hang Up) signal to the Gunicorn master process
+#shellcheck disable=SC2009
+pkill -HUP
+ps auxf | grep gunicorn
